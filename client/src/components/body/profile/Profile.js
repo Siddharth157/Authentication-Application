@@ -44,15 +44,15 @@ function Profile() {
     }
   }, [token, isAdmin, dispatch, callback]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
+  const handleChange = (event) => {
+    const { name, value } = event.target;
     setData({ ...data, [name]: value, err: "", success: "" });
   };
 
-  const changeAvatar = async (e) => {
-    e.preventDefault();
+  const changeAvatar = async (event) => {
+    event.preventDefault();
     try {
-      const file = e.target.files[0];
+      const file = event.target.files[0];
 
       if (!file)
         return setData({
@@ -102,7 +102,7 @@ function Profile() {
         }
       );
 
-      setData({ ...data, err: "", success: "Updated Success!" });
+      setData({ ...data, err: "", success: "Details updated successfuly!" });
     } catch (err) {
       setData({ ...data, err: err.response.data.msg, success: "" });
     }
@@ -112,12 +112,12 @@ function Profile() {
     if (checkPasswordLength(password))
       return setData({
         ...data,
-        err: "Password must be at least 6 characters.",
+        err: "Password must be at least 7 characters.",
         success: "",
       });
 
     if (!comparePassword(password, cf_password))
-      return setData({ ...data, err: "Password did not match.", success: "" });
+      return setData({ ...data, err: "Password comparision failed.", success: "" });
 
     try {
       axios.post(
@@ -128,7 +128,7 @@ function Profile() {
         }
       );
 
-      setData({ ...data, err: "", success: "Updated Success!" });
+      setData({ ...data, err: "", success: "Details updated successfuly!" });
     } catch (err) {
       setData({ ...data, err: err.response.data.msg, success: "" });
     }
