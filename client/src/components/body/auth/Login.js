@@ -23,13 +23,13 @@ function Login() {
 
   const { email, password, err, success } = user;
 
-  const changeInputData = (e) => {
-    const { name, value } = e.target;
+  const changeInputData = (event) => {
+    const { name, value } = event.target;
     setUser({ ...user, [name]: value, err: "", success: "" });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     try {
       const res = await axios.post("/user/login", { email, password });
       setUser({ ...user, err: "", success: res.data.msg });
@@ -38,9 +38,9 @@ function Login() {
 
       dispatch(dispatchLogin());
       history.push("/");
-    } catch (err) {
-      err.response.data.msg &&
-        setUser({ ...user, err: err.response.data.msg, success: "" });
+    } catch (error) {
+      error.response.data.msg &&
+        setUser({ ...user, err: error.response.data.msg, success: "" });
     }
   };
 
