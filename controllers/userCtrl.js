@@ -107,11 +107,11 @@ const userCtrl = {
       const { email, password } = req.body;
       const user = await Users.findOne({ email });
       if (!user)
-        return res.status(400).json({ msg: "This email does not exist." });
+        return res.status(400).json({ msg: "The provided email does not exist." });
 
       const isMatch = await bcrypt.compare(password, user.password);
       if (!isMatch)
-        return res.status(400).json({ msg: "Password is incorrect." });
+        return res.status(400).json({ msg: "Invalid Password, Enter again." });
 
       const refresh_token = generateRefreshToken({ id: user._id });
       res.cookie("refreshtoken", refresh_token, {
