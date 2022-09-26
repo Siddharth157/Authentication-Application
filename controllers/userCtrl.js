@@ -41,19 +41,19 @@ const userCtrl = {
       const { name, email, password } = req.body;
 
       if (!name || !email || !password)
-        return res.status(400).json({ msg: "Please fill in all fields." });
+        return res.status(400).json({ msg: "Please fill up all details in the fields." });
 
       if (!checkEmailValidation(email))
-        return res.status(400).json({ msg: "Invalid emails." });
+        return res.status(400).json({ msg: "Email Invalid." });
 
       const user = await Users.findOne({ email });
       if (user)
-        return res.status(400).json({ msg: "This email already exists." });
+        return res.status(400).json({ msg: "The provided email already exists." });
 
       if (password.length < 7)
         return res
           .status(400)
-          .json({ msg: "Password must be at least 6 characters." });
+          .json({ msg: "Password must be at least 7 characters." });
 
       const passwordHash = await bcrypt.hash(password, 12);
 
@@ -66,13 +66,13 @@ const userCtrl = {
       const activation_token = generateActivationToken(newUser);
 
       const url = `${CLIENT_URL}/user/activate/${activation_token}`;
-      sendMail(email, url, "Verify your email address");
+      sendMail(email, url, "Please verify your email address");
 
       res.json({
         msg: "Register Success! Please activate your email to start.",
       });
-    } catch (err) {
-      return res.status(500).json({ msg: err.message });
+    } catch (error) {
+      return res.status(500).json({ msg: error.message });
     }
   },
   activateEmail: async (req, res) => {
