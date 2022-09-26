@@ -233,9 +233,9 @@ const userCtrl = {
   logout: async (req, res) => {
     try {
       res.clearCookie("refreshtoken", { path: "/user/refresh_token" });
-      return res.json({ msg: "Logged out succssfully" });
-    } catch (err) {
-      return res.status(500).json({ msg: err.message });
+      return res.json({ msg: "User Logout Successfully." });
+    } catch (error) {
+      return res.status(500).json({ msg: error.message });
     }
   },
 };
