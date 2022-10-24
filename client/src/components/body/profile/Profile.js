@@ -2,7 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { checkPasswordLength, comparePassword } from "../../utils/validation/Validation";
+import {
+  checkPasswordLength,
+  comparePassword,
+} from "../../utils/validation/Validation";
 import {
   showSuccessMsg,
   showErrMsg,
@@ -112,7 +115,7 @@ function Profile() {
     if (checkPasswordLength(password))
       return setData({
         ...data,
-        err: "Password must be at least 6 characters.",
+        err: "Password must be at least 7 characters.",
         success: "",
       });
 

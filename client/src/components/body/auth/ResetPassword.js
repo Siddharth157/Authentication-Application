@@ -61,7 +61,7 @@ function ResetPassword() {
 
   return (
     <div className="fg_pass">
-      <h2>Reset you password</h2>
+      <h2>Reset your password</h2>
 
       <div className="row">
         {err && showErrMsg(err)}
